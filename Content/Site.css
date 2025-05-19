@@ -1,0 +1,283 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #000;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #777;
+    border-color: #fff
+}
+
+.fa-star {
+    color: #ccc !important; /* כוכבים ריקים */
+}
+
+    .fa-star.checked {
+        color: #ffcc00 !important; /* כוכבים מלאים */
+    }
+
+
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 250px;
+    margin: auto;
+    border: none !important;
+    /*box-shadow: none !important;*/
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* צל מודגש */
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+.card-body {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* צל מודגש */
+    transition: all 0.3s ease; /* אנימציה */
+}
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* עיצוב הטקסט בתפריט */
+.navbar .nav-link {
+    font-size: 1.2rem; /* מגדיל את גודל הטקסט */
+    color: #ffffff !important; /* שומר על צבע לבן */
+    margin-right: 15px; /* מרווח בין הפריטים */
+}
+
+.navbar .navbar-brand {
+    font-size: 1.5rem; /* מגדיל את שם המותג */
+    color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+    color: #f8f9fa !important; /* צבע לטקסט במעבר עכבר */
+    background-color: #007bff; /* צבע כחול */
+}
+
+
+.carousel-item {
+    display: flex; /* מציג את הפריטים בפלקס */
+    flex-direction: column; /* מסדר אותם אנכית */
+    justify-content: center; /* מרכז את התמונה ואת התוכן אנכית */
+    align-items: center; /* מרכז את התמונה ואת התוכן אופקית */
+}
+
+
+.carousel-caption {
+    position: static;
+    background-color: transparent;
+    color: black !important;
+}
+
+
+.carousel-item img {
+    width: 300px; /* רוחב אחיד */
+    height: 400px; /* גובה אחיד */
+    object-fit: cover; /* חיתוך התמונה לשמירה על פרופורציות */
+    margin: 0 auto; /* מרכז את התמונה */
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+.carousel-item .row {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-item .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.carousel-caption h3, .carousel-caption p {
+    color: black !important; /* הגדרה קשיחה של צבע שחור */
+    text-shadow: none !important; /* הסרת צללים */
+}
+
+.fa-star.checked,
+.fa-star-half-alt.checked {
+    color: #ffcc00 !important; /* צהוב לכוכבים מלאים וחצויים */
+}
+
+.fa-star-half-alt {
+    color: #ccc; /* צבע ברירת מחדל לכוכב חצי שאינו מסומן */
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+
+.page-background {
+    background-image: url('/images/background.jpg'); /* החלף בשם ובנתיב הנכון */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.custom-btn {
+    display: inline-flex; /* מיישר את הטקסט והאייקון יחד */
+    align-items: center; /* מיישר אנכית */
+    justify-content: center; /* ממרכז אופקית */
+    padding: 30px 60px; /* ריווח פנימי גדול יותר - הכפתור יהיה רחב וגבוה */
+    margin: 25px; /* ריווח חיצוני בין הכפתורים */
+    font-size: 2rem; /* גודל טקסט גדול */
+    color: #ffffff; /* צבע טקסט */
+    background-color: rgba(0, 123, 255, 0.8); /* צבע כחול עם שקיפות עדינה */
+    border: 4px solid rgba(0, 123, 255, 0.8); /* מסגרת שקופה למחצה */
+    border-radius: 60px; /* פינות מעוגלות מאוד */
+    text-decoration: none; /* מסיר קו תחתון */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* צל מודגש */
+    transition: all 0.3s ease; /* אנימציה חלקה */
+    cursor: pointer;
+}
+
+    .custom-btn i {
+        margin-right: 12px; /* רווח בין האייקון לטקסט */
+        font-size: 2.8rem; /* גודל אייקון ענק */
+    }
+
+    .custom-btn:hover {
+        background-color: rgba(0, 86, 179, 0.9); /* צבע כחול כהה יותר בהובר */
+        border-color: rgba(0, 86, 179, 0.9); /* צבע המסגרת מתעדכן */
+        transform: scale(1.2); /* הגדלה בהובר */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* צל גדול יותר בהובר */
+    }
+
+    .custom-btn:active {
+        transform: scale(1.1); /* אפקט לחיצה קל */
+    }
+
+
+/* עיצוב כללי */
+form {
+    margin: 10px;
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* עיצוב לשדות הטקסט והסלקט */
+.form-control {
+    height: 50px; /* גובה אחיד */
+    font-size: 1.1rem;
+    border-radius: 8px; /* פינות מעוגלות */
+    border: 2px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+/* כפתורים בסגנון מותאם */
+.custom-btn_lib {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+    .custom-btn_lib i {
+        margin-right: 8px;
+        font-size: 1.5rem;
+    }
+
+    .custom-btn_lib:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+
+/*body_login {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);*/ /* רקע עדין */
+    /*color: #333;
+    font-family: Arial, sans-serif;
+}*/
+
+.card_login {
+    background-color: #ffffff; /* רקע לבן לכרטיס */
+    border: none; /* מסיר את המסגרת */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* צל רך */
+}
+
+.input-group-text_login {
+    border-right: none; /* מסיר את הקו המפריד */
+    color: #007bff;
+}
+
+.form-control_login {
+    width: 100% !important;
+    border-left: none;
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .form-control_login:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    }
+
+.btn-primary_login {
+    background-color: #007bff;
+    border: none;
+    font-size: 1.2rem;
+    padding: 12px;
+    border-radius: 30px; /* פינות מעוגלות */
+    transition: all 0.3s ease;
+}
+
+    .btn-primary_login:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    }

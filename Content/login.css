@@ -1,0 +1,103 @@
+﻿/* טופס ראשי */
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(45deg, skyblue, darkblue);
+    padding: 30px;
+    width: 450px;
+    border-radius: 20px;
+    font-family: "Segoe UI", Roboto, "Open Sans", sans-serif;
+    transition: background 0.3s ease;
+}
+
+    .custom-form:hover {
+        background: linear-gradient(45deg, darkblue, skyblue);
+    }
+
+/* שדה טקסט */
+.custom-input-container {
+    border: 1.5px solid #ecedec;
+    border-radius: 10em;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.custom-input {
+    margin-left: 10px;
+    border-radius: 10rem;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+    .custom-input:focus {
+        outline: none;
+    }
+
+.custom-input-container:focus-within {
+    border: 1.5px solid orange;
+}
+
+/* לחצנים */
+.custom-button {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    transition: ease-out 0.5s;
+    border: 2px solid;
+    border-radius: 10em;
+    box-shadow: inset 0 0 0 0 blue;
+    margin: 20px 0 10px 0;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+}
+
+    .custom-button:hover {
+        box-shadow: inset 0 -100px 0 0 royalblue;
+    }
+
+    .custom-button:active {
+        transform: scale(0.9);
+    }
+
+/* טקסט תחתון */
+.custom-text {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.custom-icon-button {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ededef;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+    .custom-icon-button:hover {
+        border: 1px solid orange;
+    }
+
+
+
