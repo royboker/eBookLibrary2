@@ -1,0 +1,259 @@
+﻿<div class="container">
+    <h1 class="text-center">Welcome to the eBook Library</h1>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            alert('@TempData["ErrorMessage"]');
+            window.location.href = '@Url.Action("ShowLibrary", "Library")';
+        </script>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            alert('@TempData["SuccessMessage"]');
+            window.location.href = '@Url.Action("ShowLibrary", "Library")';
+        </script>
+    }
+
+    <style>
+        body {
+            background-image: url('/images/library.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .card {
+            width: 300px;
+            height: 500px;
+            border-radius: 20px;
+            background: #f5f5f5;
+            position: relative;
+            padding: 1.8rem;
+            border: 2px solid #c3c6ce;
+            transition: 0.5s ease-out;
+            overflow: visible;
+        }
+
+        .card-details {
+            color: black;
+            height: 100%;
+            gap: .5em;
+            display: grid;
+            place-content: center;
+        }
+
+        .card-button {
+            transform: translate(-50%, 125%);
+            width: 60%;
+            border-radius: 1rem;
+            border: none;
+            background-color: #008bf8;
+            color: #fff;
+            font-size: 1rem;
+            padding: .5rem 1rem;
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            opacity: 0;
+            transition: 0.3s ease-out;
+        }
+
+
+        .text-body {
+            color: rgb(134, 134, 134);
+        }
+
+        /*Text*/
+        .text-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /*Hover*/
+        .card:hover {
+            border-color: #008bf8;
+            box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+        }
+
+            .card:hover .card-button {
+                transform: translate(-50%, 0); /* הכנס את הכפתור פנימה */
+                opacity: 1;
+            }
+    </style>
+
+    <div class="container text-center my-4">
+        <div class="d-flex justify-content-center flex-wrap align-items-center">
+            @*טופס חיפוש*@
+            <form method="get" action="@Url.Action("ShowLibrary", "Library")" class="d-flex align-items-center mr-3">
+                <label for="searchTerm" class="mr-2">Search:</label>
+                <input type="text" name="searchTerm" id="searchTerm"
+                       class="form-control mr-2"
+                       placeholder="Name of the book, author, publisher"
+                       value="@Request.QueryString["searchTerm"]" />
+                <button type="submit" class="btn custom-btn_lib">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+
+            @*טופס מיון*@
+            <form method="get" action="@Url.Action("ShowLibrary", "Library")" class="d-flex align-items-center mr-3">
+                <label for="sortOrder" class="mr-2">Sort by:</label>
+                <select name="sortOrder" id="sortOrder" class="form-control mr-2">
+                    <option value="" @(string.IsNullOrEmpty(Request.QueryString["sortOrder"]) ? "selected" : "")>Select...</option>
+                    <option value="price_asc" @(Request.QueryString["sortOrder"] == "price_asc" ? "selected" : "")>Price (Low to High)</option>
+                    <option value="price_desc" @(Request.QueryString["sortOrder"] == "price_desc" ? "selected" : "")>Price (High to Low)</option>
+                    <option value="popularity" @(Request.QueryString["sortOrder"] == "popularity" ? "selected" : "")>Popularity</option>
+                    <option value="year" @(Request.QueryString["sortOrder"] == "year" ? "selected" : "")>Year of Publication</option>
+                </select>
+                <button type="submit" class="btn custom-btn_lib">
+                    <i class="fas fa-sort"></i> Sort
+                </button>
+            </form>
+
+            <!-- טופס סינון -->
+            <form method="get" action="@Url.Action("ShowLibrary", "Library")" class="d-flex align-items-center">
+                <label for="genre" class="mr-2">Filter:</label>
+                <select name="genre" id="genre" class="form-control mr-2">
+                    <option value="" @(string.IsNullOrEmpty(Request.QueryString["genre"]) ? "selected" : "")>Select Genre...</option>
+                    @foreach (var genre in ViewBag.Genres as List<string>)
+                    {
+                        <option value="@genre" @(Request.QueryString["genre"] == genre ? "selected" : "")>@genre</option>
+                    }
+                </select>
+                <button type="submit" class="btn custom-btn_lib">
+                    <i class="fas fa-filter"></i> Filter
+                </button>
+            </form>
+
+
+
+            @*טופס סוג קנייה*@
+            <form method="get" action="@Url.Action("ShowLibrary", "Library")" class="d-flex align-items-center mr-3">
+                <label for="purchaseType" class="mr-2">Purchase Type:</label>
+                <select name="purchaseType" id="purchaseType" class="form-control mr-2">
+                    <option value="" @(string.IsNullOrEmpty(Request.QueryString["purchaseType"]) ? "selected" : "")>All</option>
+                    <option value="Buy" @(Request.QueryString["purchaseType"] == "Buy" ? "selected" : "")>Buy Only</option>
+                    <option value="Borrow" @(Request.QueryString["purchaseType"] == "Borrow" ? "selected" : "")>Buy and Borrow</option>
+                </select>
+                <button type="submit" class="btn custom-btn_lib">
+                    <i class="fas fa-filter"></i> Apply
+                </button>
+            </form>
+
+            @*טופס טווח מחירים*@
+            <form method="get" action="@Url.Action("ShowLibrary", "Library")" class="d-flex align-items-center mr-3">
+                <label for="minPrice" class="mr-2">Price Range:</label>
+                <input type="number" name="minPrice" id="minPrice"
+                       class="form-control mr-2"
+                       placeholder="Min Price"
+                       value="@Request.QueryString["minPrice"]" />
+                <input type="number" name="maxPrice" id="maxPrice"
+                       class="form-control mr-2"
+                       placeholder="Max Price"
+                       value="@Request.QueryString["maxPrice"]" />
+                <button type="submit" class="btn custom-btn_lib">
+                    <i class="fas fa-filter"></i> Apply
+                </button>
+            </form>
+
+            @*טופס סינון לפי מחיר מוזל*@
+            <form method="get" action="@Url.Action("ShowLibrary", "Library")" class="d-flex align-items-center">
+                <label class="mr-2">Discounted Only:</label>
+                <input type="checkbox" name="discounted" id="discounted" value="true"
+                       @(Request.QueryString["discounted"] == "true" ? "checked" : "") />
+                <button type="submit" class="btn custom-btn_lib">
+                    <i class="fas fa-filter"></i> Apply
+                </button>
+            </form>
+        </div>
+    </div>
+
+    @*רשימת הספרים*@
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4 mb-4">
+                @*<div class="card">
+                        <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title" style="height: 300px; width: 250px; object-fit: cover;">
+
+                        <p class="text-body">
+
+                            <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text">Author: @book.Author</p>
+                        @if (book.BuyPrice < book.Price)
+                        {
+                            <p class="card-text">
+                                <span style="color: red; text-decoration: line-through;">Price: $@book.Price</span><br>
+                                <span style="color: green; font-weight: bold;">Sale Price: $@book.BuyPrice</span>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="card-text">Price: $@book.Price</p>
+                        }
+                        <p>
+                            Popularity:
+                            @{
+                                var fullStars = (int)Math.Floor(book.Popularity); // כוכבים מלאים
+                                var halfStar = book.Popularity % 1 >= 0.5; // האם יש כוכב חצי
+                                var emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // כוכבים ריקים
+                            }
+                            @for (int k = 0; k < fullStars; k++)
+                            {
+                                <k class="fa fa-star checked"></k>
+                            }
+                            @if (halfStar)
+                            {
+                                <k class="fa fa-star-half-alt checked"></k>
+                            }
+                            <button class="card-button" onclick="location.href='@Url.Action("BookDetails", "Library", new { id = book.BookId })'">
+                                Book Details
+                            </button>
+                    </div>*@
+
+                <div class="card">
+                    <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title" style="height: 300px; width: 250px; object-fit: cover;">
+
+                    <p class="text-body">
+
+                        <h5 class="card-title">@book.Title</h5>
+                    <p class="card-text">Author: @book.Author</p>
+                    @if (book.BuyPrice < book.Price)
+                    {
+                        <p class="card-text">
+                            <span style="color: red; text-decoration: line-through;">Price: $@book.Price</span><br>
+                            <span style="color: green; font-weight: bold;">Sale Price: $@book.BuyPrice</span>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="card-text">Price: $@book.Price</p>
+                    }
+                    <p>
+                        Popularity:
+                        @{
+                            var fullStars = (int)Math.Floor(book.Popularity); // כוכבים מלאים
+                            var halfStar = book.Popularity % 1 >= 0.5; // האם יש כוכב חצי
+                            var emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // כוכבים ריקים
+                        }
+                        @for (int k = 0; k < fullStars; k++)
+                        {
+                            <k class="fa fa-star checked"></k>
+                        }
+                        @if (halfStar)
+                        {
+                            <k class="fa fa-star-half-alt checked"></k>
+                        }
+                        <button class="card-button" onclick="location.href='@Url.Action("BookDetails", "Library", new { id = book.BookId })'">
+                            Book Details
+                        </button>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

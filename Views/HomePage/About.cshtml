@@ -1,0 +1,349 @@
+﻿
+@{
+    ViewBag.Title = "About";
+}
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert('@TempData["Message"]');
+    </script>
+}
+<div class="about-page">
+    <h1 class="main-heading">Welcome to Our eBook Library</h1>
+    <div class="about-description">
+        <p>
+            Our eBook library is your gateway to an extensive world of knowledge and entertainment.
+            Whether you're looking to borrow, purchase, or simply explore, we provide an intuitive and seamless experience.
+            With thousands of carefully curated titles spanning multiple genres, you are guaranteed to find your next favorite read.
+            Join our growing community of avid readers and take your passion for books to the next level!
+        </p>
+    </div>
+
+    <div class="stats-section">
+        <div class="stats">
+            <div class="stat-card">
+                <p class="stat-label">Over</p>
+                <span id="user-count" class="stat-number" data-count="@ViewBag.TotalUsers">0</span>
+                <p class="stat-description">Happy Users</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Over</p>
+                <span id="book-count" class="stat-number" data-count="@ViewBag.TotalBooks">0</span>
+                <p class="stat-description">Books Available</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Over</p>
+                <span id="book-count" class="stat-number" data-count="@ViewBag.TotalReviews">0</span>
+                <p class="stat-description">Reviews</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="reviews-section">
+        <h2 class="reviews-heading">What Our Users Say</h2>
+        <div class="reviews-carousel">
+            @foreach (var review in ViewBag.LatestReviews)
+            {
+                <div class="review-card">
+                    <p class="review-content">"@review.Content"</p>
+                    <p class="review-rating">Rating: @review.Rating/5</p>
+                    <p class="review-user">- @review.UserName</p>
+                </div>
+            }
+        </div>
+    </div>*@
+
+<div class="reviews-section">
+    <h2 class="reviews-heading">What Our Users Say</h2>
+    <div class="reviews-carousel">
+        @foreach (var review in ViewBag.LatestReviews)
+        {
+            <div class="card">
+                <div class="stars">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < review.Rating)
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="star filled">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                        }
+                    }
+                </div>
+
+                <div class="infos">
+                    @*<p class="date-time">
+                        @review.Date.ToString("MMM dd, yyyy")
+                    </p>*@
+                    <p class="description">
+                        @review.Content
+                    </p>
+                </div>
+
+                <div class="author">
+                    — @review.UserName
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@*<div class="reviews-section">
+        <h2 class="reviews-heading">What Our Users Say</h2>
+        <div class="reviews-marquee">
+            <div class="reviews-marquee-inner" id="reviews-container">
+                @foreach (var review in ViewBag.LatestReviews)
+                {
+                    <div class="review-card">
+                        <p class="review-content">"@review.Content"</p>
+                        <p class="review-rating">Rating: @review.Rating/5</p>
+                        <p class="review-user">- @review.UserName</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
+
+@if (Session["UserId"] != null)
+{
+    <div class="add-review-button">
+        <a href="@Url.Action("AddReview", "Account")" class="btn btn-primary">Add Your Review</a>
+    </div>
+}
+
+
+<script>
+    // Animation for counters
+    document.querySelectorAll('.stat-number').forEach(function (el) {
+        const countTo = parseInt(el.getAttribute('data-count'), 10);
+        let count = 0;
+        const interval = setInterval(() => {
+            count++;
+            el.textContent = count + '+';
+            if (count >= countTo) clearInterval(interval);
+        }, 40); // Animation speed
+    });
+
+    // JavaScript להוספת אפקט "סרט נע"
+    //document.addEventListener("DOMContentLoaded", function () {
+    //    const container = document.getElementById("reviews-container");
+    //    const reviews = Array.from(container.children);
+    //    let currentIndex = 0;
+
+    //    function moveReviews() {
+    //        const currentReview = reviews[currentIndex];
+    //        container.style.transition = "transform 1s ease-in-out";
+    //        container.style.transform = `translateX(-${currentReview.offsetWidth}px)`;
+
+    //        currentIndex++;
+
+    //        if (currentIndex >= reviews.length) {
+    //            setTimeout(() => {
+    //                container.style.transition = "none";
+    //                container.style.transform = "translateX(0)";
+    //                currentIndex = 0;
+    //            }, 500); // להתאים את הזמן לאנימציה
+    //        }
+    //    }
+
+    //    setInterval(moveReviews, 1500); // מעביר כל 3 שניות
+    //});
+
+</script>
+
+<style>
+    .about-page {
+        padding: 30px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+
+    .main-heading {
+        font-size: 3.5rem;
+        color: #333;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+        .main-heading::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 5px;
+            background: #007bff;
+            bottom: -10px;
+            left: 25%;
+            animation: slideIn 1s ease-in-out;
+        }
+
+
+
+    .about-description {
+        margin: 30px auto;
+        max-width: 900px;
+        background-color: rgba(0, 123, 255, 0.1);
+        padding: 30px;
+        border: 2px solid rgba(0, 123, 255, 0.3);
+        border-radius: 15px;
+        font-size: 1.5rem;
+        line-height: 2;
+        color: #555;
+    }
+
+    .stats-section {
+        margin-top: 50px;
+    }
+
+    .stats-heading {
+        font-size: 2.8rem;
+        color: #007bff;
+        margin-bottom: 40px;
+    }
+
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .stat-card {
+        background: rgba(0, 123, 255, 0.05);
+        padding: 25px;
+        border: 2px solid rgba(0, 123, 255, 0.2);
+        border-radius: 15px;
+        width: 250px;
+        text-align: center;
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .stat-card:hover {
+            transform: scale(1.1);
+        }
+
+    .stat-label {
+        font-size: 1.5rem;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        color: #007bff;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+
+    .stat-description {
+        font-size: 1.3rem;
+        color: #555;
+    }
+
+
+
+    .reviews-section {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .reviews-heading {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #007bff;
+    }
+
+    .reviews-carousel {
+        display: flex;
+        flex-wrap: nowrap; /* שומר על הכרטיסים בשורה אחת */
+        gap: 20px;
+        overflow-x: auto; /* מאפשר גלילה אופקית במידת הצורך */
+        scrollbar-width: none; /* הסתרת פס גלילה בדפדפנים תומכים */
+        padding: 20px;
+    }
+
+        .reviews-carousel::-webkit-scrollbar {
+            display: none; /* הסתרת פס גלילה בדפדפן כרום */
+        }
+
+
+    .card {
+        /*display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgba(255, 255, 255, 1);
+        padding: 20px;
+        max-width: 320px;*/
+        /*flex: 0 0 auto;*/ /* מבטיח שהכרטיסים לא יתכווצו */
+        /*width: 200px;*/ /* רוחב קבוע לכל כרטיס */
+        /*margin-right: 10px;*/ /* רווח בין הכרטיסים */
+        /*border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;*/
+
+        flex: 0 0 auto;
+        width: 280px; /* הרחבת הכרטיסים */
+        margin-right: 15px;
+        padding: 25px; /* הגדלת הרווח הפנימי */
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.2);
+            /*transform: scale(1.05);*/ /* אפקט קפיצה לכרטיסים */
+        }
+
+    .stars {
+        display: flex;
+        grid-gap: 0.25rem;
+        gap: 0.25rem;
+        color: rgb(255, 200, 50);
+        margin-bottom: 15px; /* רווח בין הכוכבים לתיאור */
+    }
+
+    .star {
+        height: 1.5rem;
+        width: 1.5rem;
+        
+    }
+
+    .infos {
+        margin-top: 1rem;
+    }
+
+    .date-time {
+        color: rgba(7, 63, 216, 1);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .description {
+        margin-top: 0.5rem;
+        font-size: 1.2rem; /* הגדלת הגופן של הביקורת */
+        line-height: 1.75;
+        color: rgba(60, 60, 60, 1);
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .author {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: rgba(80, 80, 80, 1);
+        text-align: right;
+    }
+
+    .add-review-button {
+        margin-top: 30px;
+    }
+</style>

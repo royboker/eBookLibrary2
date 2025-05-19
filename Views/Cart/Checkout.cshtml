@@ -1,0 +1,203 @@
+﻿@model List<eBookLibrary3.Models.CartItem>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .checkout-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .checkout-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            .checkout-table thead {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .checkout-table th,
+            .checkout-table td {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .checkout-table td {
+                vertical-align: middle;
+            }
+
+        .book-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .book-image {
+            height: 100px;
+            width: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .total-price {
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .checkout-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .checkout-btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .checkout-btn-success {
+            background-color: #2ecc71;
+        }
+
+            .checkout-btn-success:hover {
+                background-color: #27ae60;
+            }
+
+        .checkout-btn-paypal {
+            background-color: #0070ba;
+        }
+
+            .checkout-btn-paypal:hover {
+                background-color: #005ea6;
+            }
+
+        .checkout-btn-secondary {
+            background-color: #6c757d;
+        }
+
+            .checkout-btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+        .checkout-btn i {
+            font-size: 1.2rem;
+        }
+
+        .paypal-logo {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <h1 class="checkout-title">Checkout</h1>
+
+        <table class="checkout-table">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Price</th>
+                    <th>Purchase Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="book-info">
+                            <img src="@item.ImageUrl" alt="@item.Title" class="book-image" />
+                            <div class="book-details">
+                                <p class="book-title">@item.Title</p>
+                            </div>
+                        </td>
+                        <td>
+                            @if (item.PurchaseType == "Buy")
+                            {
+                                @($"${item.PurchasePrice}")
+                            }
+                            else if (item.PurchaseType == "Borrow")
+                            {
+                                @($"${item.BorrowPrice}")
+                            }
+                        </td>
+                        <td>@item.PurchaseType</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3 class="total-price">
+            Total: $@Model.Sum(x => x.PurchaseType == "Buy" ? x.PurchasePrice : (x.BorrowPrice ?? 0))
+        </h3>
+
+        <div class="checkout-actions">
+            <form method="get" action="@Url.Action("CardUserPayment", "Cart")">
+                <button type="submit" class="checkout-btn checkout-btn-success">
+                    <i class="fa fa-credit-card"></i> Pay with Credit Card
+                </button>
+            </form>
+
+            @using (Html.BeginForm("MakePayment", "Payment", FormMethod.Post))
+            {
+                <input type="hidden" name="amount" value="@Model.Sum(x => x.PurchaseType == "Buy" ? x.PurchasePrice : (x.BorrowPrice ?? 0))" />
+                <button type="submit" class="checkout-btn checkout-btn-paypal">
+                    <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" class="paypal-logo" /> Pay with PayPal
+                </button>
+            }
+
+            <form method="get" action="@Url.Action("ShowCart", "Cart")">
+                <button type="submit" class="checkout-btn checkout-btn-secondary">
+                    <i class="fa fa-arrow-left"></i> Back to Cart
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<eBookLibrary3.Models.Orders>
+
+<h1>My Orders</h1>
+<div class="summary">
+    <p><strong>Total Orders:</strong> @ViewBag.TotalOrders</p>
+    <p><strong>Total Amount Spent:</strong> $@ViewBag.TotalAmount</p>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                <td>@order.TotalAmount</td>
+                <td>@order.PaymentStatus</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    .summary {
+        margin: 20px 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+        }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-striped tbody tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>

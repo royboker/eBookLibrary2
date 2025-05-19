@@ -1,0 +1,44 @@
+﻿@model IEnumerable<eBookLibrary3.Models.Borrow>
+<h1>Your Borrowed Books</h1>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var borrow in Model)
+        {
+            <div class="col-md-4">
+                <div class="card" style="margin-bottom: 20px;">
+                    <img src="@borrow.Book.ImageUrl" class="card-img-top" alt="@borrow.Book.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@borrow.Book.Title</h5>
+                        <p class="card-text">Author: @borrow.Book.Author</p>
+                        @if (Math.Ceiling((borrow.ReturnDate - DateTime.Now).TotalDays) < 5)
+                        {
+                            <p class="card-text" style="color: red;">
+                                Time Left: @Math.Ceiling((borrow.ReturnDate - DateTime.Now).TotalDays) days
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="card-text">
+                                Time Left: @Math.Ceiling((borrow.ReturnDate - DateTime.Now).TotalDays) days
+                            </p>
+                        }
+                        <form method="post" action="@Url.Action("RateBookForm", "Book", new { bookId = borrow.BookId })">
+                            <button type="submit" class="btn btn-danger">Rate Book</button>
+                        </form>
+
+                        <form action="@Url.Action("DownloadBorrowedBook", "Book")" method="get">
+                            <input type="hidden" name="bookId" value="@borrow.Book.BookId" />
+                            <button type="submit" class="btn btn-primary">Download PDF</button>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

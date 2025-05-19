@@ -1,0 +1,37 @@
+﻿@model IEnumerable<eBookLibrary3.Models.PurchaseViewModel>
+
+@{
+    ViewBag.Title = "Your Purchases";
+}
+
+<h1>Your Purchases</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var purchase in Model)
+        {
+            <div class="col-md-4">
+                <div class="card" style="margin-bottom: 20px;">
+                    <img src="@purchase.ImageUrl" class="card-img-top" alt="@purchase.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@purchase.Title</h5>
+                        <p class="card-text">Author: @purchase.Author</p>
+                        <p class="card-text">Price: $@purchase.Price</p>
+                        <p class="card-text">id: @purchase.BookId</p>
+                        <p class="card-text">Purchase Date: @purchase.PurchaseDate.ToShortDateString()</p>
+                        <form method="post" action="@Url.Action("RemoveBook", "Book", new { purchaseId = @purchase.PurchaseId })">
+                            <button type="submit" class="btn btn-danger">Remove Book</button>
+                        </form>
+                        <form method="post" action="@Url.Action("RateBookForm", "Book", new { bookId = @purchase.BookId })">
+                            <button type="submit" class="btn btn-danger">Rate Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

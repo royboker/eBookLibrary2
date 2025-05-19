@@ -1,0 +1,41 @@
+﻿
+@Model List<Book>
+
+    @{
+        ViewBag.Title = "Admin Library";
+    }
+    @if (TempData["Message"] != null)
+    {
+        <script>
+        alert('@TempData["Message"]');
+        </script>
+    }
+    <h1>Manage Library</h1>
+
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-4">
+                <div class="card" style="margin-bottom: 20px;">
+                    <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title" style="height: 300px; width: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+                        <p class="card-text">Author: @book.Author</p>
+                        @if (book.BuyPrice < book.Price@*&&*@ @*book.BuyPrice !=0*@)
+{
+<p class="card-text">
+    <span style="color: red; text-decoration: line-through;">Price: $@book.Price</span><br>
+    <span style="color: green; font-weight: bold;">Sale Price: $@book.BuyPrice</span>
+</p>
+}
+else
+{
+<p class="card-text">Price: $@book.Price</p>
+}
+                        <a href="@Url.Action("EditBook", "Admin", new { bookId = book.BookId })" class="btn btn-warning">Edit Book</a>
+                        <a href="@Url.Action("DeleteBook", "Admin", new { bookId = book.BookId })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this book?');">Delete Book</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

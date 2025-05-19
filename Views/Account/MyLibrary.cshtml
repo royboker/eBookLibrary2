@@ -1,0 +1,152 @@
+﻿@model eBookLibrary3.Models.MyLibraryViewModel
+
+
+@{
+    ViewBag.Title = "My Library";
+}
+
+<h1>My Library</h1>
+
+<div class="container">
+    <!-- ספרים שנרכשו -->
+    <h2>Books You Own</h2>
+    <div class="row">
+        @foreach (var purchase in Model.PurchasedBooks)
+        {
+            <div class="col-md-4">
+                <div class="card" style="margin-bottom: 20px;">
+                    <img src="@purchase.ImageUrl" class="card-img-top" alt="@purchase.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@purchase.Title</h5>
+                        <p class="card-text">Author: @purchase.Author</p>
+                        <p class="card-text">Price: $@purchase.Price</p>
+                        <p class="card-text">Purchase Date: @purchase.PurchaseDate.ToShortDateString()</p>
+                        @*<form method="post" action="@Url.Action("RemoveBook", "Book", new { purchaseId = @purchase.PurchaseId })">
+            <button type="submit" class="btn btn-danger">Remove Book</button>
+        </form>*@
+                        <form method="post" action="@Url.Action("RemoveBook", "Book", new { purchaseId = @purchase.PurchaseId })" onsubmit="return confirmDelete();">
+                            <button type="submit" class="btn btn-danger">Remove Book</button>
+                        </form>
+                        <form method="post" action="@Url.Action("RateBookForm", "Book", new { bookId = @purchase.BookId })">
+                            <button type="submit" class="btn btn-primary">Rate Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- ספרים מושאלים -->
+    <h2>Books You Borrowed</h2>
+    <div class="row">
+        @foreach (var borrow in Model.BorrowedBooks)
+        {
+            <div class="col-md-4">
+                <div class="card" style="margin-bottom: 20px;">
+                    <img src="@borrow.Book.ImageUrl" class="card-img-top" alt="@borrow.Book.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@borrow.Book.Title</h5>
+                        <p class="card-text">Author: @borrow.Book.Author</p>
+                        @if (Math.Ceiling((borrow.ReturnDate - DateTime.Now).TotalDays) < 5)
+                        {
+                            <p class="card-text" style="color: red;">
+                                Time Left: @Math.Ceiling((borrow.ReturnDate - DateTime.Now).TotalDays) days
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="card-text">
+                                Time Left: @Math.Ceiling((borrow.ReturnDate - DateTime.Now).TotalDays) days
+                            </p>
+                        }
+
+
+                        <form method="post" action="@Url.Action("RateBookForm", "Book", new { bookId = borrow.BookId })">
+                            <button type="submit" class="btn btn-primary">Rate Book</button>
+                        </form>
+                        <form action="@Url.Action("DownloadBorrowedBook", "Book")" method="get">
+                            <input type="hidden" name="bookId" value="@borrow.Book.BookId" />
+                            <button type="submit" class="btn btn-success">Download PDF</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>function confirmDelete() {
+        return confirm("Are you sure you want to remove this book?");
+    }</script>
+
+<style>
+    body {
+        background-image: url('/images/library.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    .card {
+        width: 300px;
+        height: 500px;
+        border-radius: 20px;
+        background: #f5f5f5;
+        position: relative;
+        padding: 1.8rem;
+        border: 2px solid #c3c6ce;
+        transition: 0.5s ease-out;
+        overflow: visible;
+    }
+
+    .card-details {
+        color: black;
+        height: 100%;
+        gap: .5em;
+        display: grid;
+        place-content: center;
+    }
+
+    .card-button {
+        transform: translate(-50%, 125%);
+        width: 60%;
+        border-radius: 1rem;
+        border: none;
+        background-color: #008bf8;
+        color: #fff;
+        font-size: 1rem;
+        padding: .5rem 1rem;
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        opacity: 0;
+        transition: 0.3s ease-out;
+    }
+
+
+    .text-body {
+        color: rgb(134, 134, 134);
+    }
+
+    /*Text*/
+    .text-title {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    /*Hover*/
+    .card:hover {
+        border-color: #008bf8;
+        box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+    }
+
+        .card:hover .card-button {
+            transform: translate(-50%, 0); /* הכנס את הכפתור פנימה */
+            opacity: 1;
+        }
+
+
+    
+
+</style>

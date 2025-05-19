@@ -1,0 +1,87 @@
+﻿@model eBookLibrary3.Models.Book
+
+@{
+    ViewBag.Title = "Add New Book";
+}
+
+<h1>Add New Book</h1>
+<form asp-action="AddBook" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label for="Title" class="control-label">Title</label>
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Enter title" })
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="Author" class="control-label">Author</label>
+        @Html.TextBoxFor(model => model.Author, new { @class = "form-control", placeholder = "Enter author" })
+        @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="Publisher" class="control-label">Publisher</label>
+        @Html.TextBoxFor(model => model.Publisher, new { @class = "form-control", placeholder = "Enter publisher" })
+        @Html.ValidationMessageFor(model => model.Publisher, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="Price" class="control-label">Price</label>
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "Enter price" })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="BuyPrice" class="control-label">Sale Price</label>
+        @Html.TextBoxFor(model => model.BuyPrice, new { @class = "form-control", placeholder = "Enter buy price" })
+        @Html.ValidationMessageFor(model => model.BuyPrice, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="BorrowPrice" class="control-label">Borrow Price</label>
+        @Html.TextBoxFor(model => model.BorrowPrice, new { @class = "form-control", placeholder = "Enter borrow price" })
+        @Html.ValidationMessageFor(model => model.BorrowPrice, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="YearOfPublication" class="control-label">Year Of Publication</label>
+        @Html.TextBoxFor(model => model.YearOfPublication, new { @class = "form-control", placeholder = "Enter year of publication" })
+        @Html.ValidationMessageFor(model => model.YearOfPublication, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="AgeLimit" class="control-label">Age Limit</label>
+        @Html.TextBoxFor(model => model.AgeLimit, new { @class = "form-control", placeholder = "Enter age limit" })
+        @Html.ValidationMessageFor(model => model.AgeLimit, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        <label for="Genre" class="control-label">Genre</label>
+        @Html.TextBoxFor(model => model.Genre, new { @class = "form-control", placeholder = "Enter genre" })
+        @Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="Format" class="control-label">Format</label>
+        @Html.TextBoxFor(model => model.Format, new { @class = "form-control", placeholder = "Enter format" })
+        @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="ImageUrl" class="control-label">Image URL</label>
+        @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control", placeholder = "Enter image URL" })
+        @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="ReviewCount" class="control-label">Summary</label>
+        @Html.TextBoxFor(model => model.Summary, new { @class = "form-control", placeholder = "Enter Summary" })
+        @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Book</button>
+        <a href="@Url.Action("ShowAdminLibrary", "Admin")" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+

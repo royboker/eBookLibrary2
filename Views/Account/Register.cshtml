@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Registration";
+}
+
+@*<div class="container" style="max-width: 500px; margin-top: 50px;">
+    <h1 class="text-center">@ViewBag.Title</h1>
+    <form action="SubmitAccount" method="post">
+        <div class="form-group">
+            <label for="Text1">First Name:</label>
+            <input id="Text1" name="FirstName" type="text" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Text2">Last Name:</label>
+            <input id="Text2" name="LastName" type="text" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Text3">Email:</label>
+            <input id="Text3" name="Email" type="email" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Text4">Password:</label>
+            <input id="Text4" name="PasswordHash" type="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Text5">RePassword:</label>
+            <input id="Text5" name="RePassword" type="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="Text6">Role:</label>
+            <input id="Text6" name="RoleId" type="text" class="form-control" />
+        </div>
+        <button id="submit1" type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+</div>*@
+<link rel="stylesheet" href="~/Content/login.css" />
+
+<div>
+    <form class="custom-form" action="SubmitAccount" method="post">
+
+
+        <div class="flex-column">
+            <label>First Name</label>
+        </div>
+        <div class="custom-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+
+            </svg>
+            <input placeholder="Enter First Name" class="custom-input" type="text" name="FirstName" required />
+        </div>
+
+        <div class="flex-column">
+            <label>Last Name</label>
+        </div>
+        <div class="custom-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+
+            </svg>
+            <input placeholder="Enter Last Name" class="custom-input" type="text" name="LastName" required />
+        </div>
+
+
+        <!-- שדה אימייל -->
+        <div class="flex-column">
+            <label>Email</label>
+        </div>
+        <div class="custom-input-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+
+            </svg>
+            <input placeholder="Enter your Email" class="custom-input" type="email" name="Email" required />
+        </div>
+
+        <!-- שדה סיסמה -->
+        <div class="flex-column">
+            <label>Password</label>
+        </div>
+        <div class="custom-input-container">
+
+            <input placeholder="Enter your Password" class="custom-input" name="PasswordHash" required type="password" />
+        </div>
+
+        <!-- שדה סיסמה -->
+        <div class="flex-column">
+            <label>Re Password</label>
+        </div>
+        <div class="custom-input-container">
+
+            <input placeholder="Enter Password Again" class="custom-input" name="RePassword" required type="password" />
+        </div>
+        <button class="custom-button">Sign Up!</button>
+        <p class="custom-text">
+            Already have an account?
+            <span class="span">
+                <a class="up" href="/Account/Login">Sign In!</a>
+            </span>
+        </p>
+    </form>
+</div>

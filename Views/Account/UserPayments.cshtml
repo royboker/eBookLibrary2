@@ -1,0 +1,61 @@
+﻿@model IEnumerable<eBookLibrary3.Models.Payments>
+
+<h1>My Payments</h1>
+<div class="summary">
+    <p><strong>Total Payments:</strong> @ViewBag.TotalPayments</p>
+    <p><strong>Total Amount Paid:</strong> $@ViewBag.TotalAmountPaid</p>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Payment ID</th>
+            <th>Payment Date</th>
+            <th>Amount</th>
+            <th>Method</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <td>@payment.PaymentId</td>
+                <td>@payment.PaymentDate.ToString("dd/MM/yyyy")</td>
+                <td>@payment.Amount</td>
+                <td>@payment.PaymentMethod</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    .summary {
+        margin: 20px 0;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+        }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-striped tbody tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>
+

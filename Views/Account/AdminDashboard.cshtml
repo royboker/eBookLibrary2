@@ -1,0 +1,126 @@
+﻿@*@{
+        ViewBag.Title = "Admin Dashboard";
+    }
+
+    <h1>Welcome, Admin!</h1>
+
+    <div class="container">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="@Url.Action("ShowAdminLibrary", "Admin")">Manage Library</a>
+            </li>
+            <li class="list-group-item">
+                <a href="@Url.Action("AddBook", "Admin")">Add New Book</a>
+            </li>
+            <li class="list-group-item">
+                <a href="@Url.Action("ViewUsers", "Admin")">View Users & Transactions</a>
+            </li>
+            <li class="list-group-item">
+                <a href="@Url.Action("EditProfile", "Admin")">Edit My Profile</a>
+            </li>
+        </ul>
+    </div>*@
+
+@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<h1 class="dashboard-title">Welcome, Admin!</h1>
+
+<div class="dashboard-container">
+    <div class="dashboard-card" onclick="location.href='@Url.Action("ShowAdminLibrary", "Admin")'">
+        <i class="fas fa-book dashboard-icon"></i>
+        <h3>Manage Library</h3>
+    </div>
+    <div class="dashboard-card" onclick="location.href='@Url.Action("AddBook", "Admin")'">
+        <i class="fas fa-plus dashboard-icon"></i>
+        <h3>Add New Book</h3>
+    </div>
+    <div class="dashboard-card" onclick="location.href='@Url.Action("ViewUsers", "Admin")'">
+        <i class="fas fa-users dashboard-icon"></i>
+        <h3>View Users & Transactions</h3>
+    </div>
+    <div class="dashboard-card" onclick="location.href='@Url.Action("UpdateDetails", "Account")'">
+        <i class="fas fa-user-cog dashboard-icon"></i>
+        <h3>Edit My Profile</h3>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dashboard-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #333;
+        margin: 20px 0;
+    }
+
+    .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .dashboard-card {
+        background: linear-gradient(135deg, #ff7f50, #ff4500);
+        color: #fff;
+        width: 250px;
+        height: 150px;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .dashboard-icon {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-card:nth-child(1) {
+         background: linear-gradient(135deg, #3498db, #2e86c1);
+        /*background-image: url('/images/managelibrarybutton.jpg');
+        background-size: 250px 150px;
+        background-repeat: no-repeat;*/
+    }
+
+    .dashboard-card:nth-child(2) {
+         background: linear-gradient(135deg, #2ecc71, #27ae60);
+        /*background-image: url('/images/addBook.jpg');
+        background-size: 250px 150px;
+        background-repeat: no-repeat;*/
+    }
+
+    .dashboard-card:nth-child(3) {
+        background: linear-gradient(135deg, #e67e22, #d35400);
+    }
+
+    .dashboard-card:nth-child(4) {
+        background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+</style>
+
+<!-- כולל את FontAwesome לאייקונים -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

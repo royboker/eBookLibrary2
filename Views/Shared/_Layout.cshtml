@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/site.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/all.min.css")
+    @Styles.Render("~/Content/site.css")
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+</head>
+<body>
+    @*  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("ShowHomePage", "HomePage")">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        @if (Session["UserId"] == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ShowLibrary", "Library")">Library</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Login", "Account")">Login</a>
+                            </li>
+                        }
+                        else if ((int)Session["Role"] == 1) // Admin role
+                        {
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ShowLibrary", "Library")">Library</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ShowAdminLibrary", "Admin")">Manage Library</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Dashboard", "Account")">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
+                            </li>
+                        }
+
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ShowLibrary", "Library")">Library</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("ShowCart", "Cart")">Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Dashboard", "Account")">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+
+    <div class="container text-center mt-3">
+        <!-- כפתור דף הבית -->
+        <a href="@Url.Action("ShowHomePage", "HomePage")" class="btn custom-btn">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <!-- כפתור מידע על האתר -->
+        <a href="@Url.Action("About", "HomePage")" class="btn custom-btn">
+            <i class="fa-solid fa-circle-info"></i> About
+        </a>
+        <!-- כפתור ספריה -->
+        <a href="@Url.Action("ShowLibrary", "Library")" class="btn custom-btn">
+            <i class="fas fa-book"></i> Library
+        </a>
+        @if (Session["UserId"] == null)
+        {
+            <!-- כפתור הרשמה -->
+            <a href="@Url.Action("Register", "Account")" class="btn custom-btn">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+            <!-- כפתור התחברות -->
+            <a href="@Url.Action("Login", "Account")" class="btn custom-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <!-- כפתור עגלת קניות -->
+            <a href="@Url.Action("ShowCart", "Cart")" class="btn custom-btn">
+                <i class="fas fa-shopping-cart"></i> Cart
+            </a>
+        }
+        else if ((int)Session["Role"] == 1) // Admin role
+        {
+            <!-- כפתור ספריה -->
+            <a href="@Url.Action("ShowAdminLibrary", "Admin")" class="btn custom-btn">
+                <i class="fas fa-book"></i> Admin Library
+            </a>
+            <!-- כפתור פרופיל -->
+            <a href="@Url.Action("Dashboard", "Account")" class="btn custom-btn">
+                <i class="fas fa-user"></i> Profile
+            </a>
+            <!-- כפתור יציאה -->
+            <a href="@Url.Action("Logout", "Account")" class="btn custom-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        }
+        else
+        {
+             <a href="@Url.Action("MyLibrary", "Account")" class="btn custom-btn">
+                 <i class="fas fa-book"></i> My Library
+            </a>
+            <!-- כפתור עגלת קניות -->
+            <a href="@Url.Action("ShowCart", "Cart")" class="btn custom-btn">
+                <i class="fas fa-shopping-cart"></i> Cart
+            </a>
+            <!-- כפתור פרופיל -->
+            <a href="@Url.Action("Dashboard", "Account")" class="btn custom-btn">
+                <i class="fas fa-user"></i> Profile
+            </a>
+            <!-- כפתור יציאה -->
+            <a href="@Url.Action("Logout", "Account")" class="btn custom-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        }
+
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

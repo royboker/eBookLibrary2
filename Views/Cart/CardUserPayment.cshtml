@@ -1,0 +1,189 @@
+﻿
+@model List<eBookLibrary3.Models.CartItem>
+
+
+
+<div class="payment-modal">
+    @if (TempData["Error"] != null)
+    {
+        <div class="error-message">
+            @TempData["Error"]
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="success-message">
+            @TempData["Success"]
+        </div>
+    }
+    <form action="@Url.Action("ValidatePayment", "Cart")" method="post" class="payment-form">
+        <div class="credit-card-section">
+            <div class="input-container">
+                <label class="input-label" for="card_holder_name">Card Holder Full Name</label>
+                <input placeholder="Enter your full name"
+                       name="CardHolderName"
+                       type="text"
+                       class="input-field"
+                       id="card_holder_name" />
+            </div>
+            <div class="input-container">
+                <label class="input-label" for="card_number">Card Number</label>
+                <input placeholder="0000 0000 0000 0000"
+                       name="CardNumber"
+                       type="text"
+                       class="input-field"
+                       id="card_number" />
+            </div>
+            <div class="input-container">
+                <label class="input-label" for="expiry_date">Expiry Date / CVV</label>
+                <div class="split-inputs">
+                    <input placeholder="01/23"
+                           name="ExpiryDate"
+                           type="text"
+                           class="input-field"
+                           id="expiry_date" />
+                    <input placeholder="CVV"
+                           name="CVV"
+                           type="password"
+                           class="input-field"
+                           id="cvv" />
+                </div>
+            </div>
+            <button class="pay-button" type="submit">Pay</button>
+        </div>
+    </form>
+
+</div>
+
+<style>
+    .payment-modal {
+        width: fit-content;
+        height: fit-content;
+        background: #ffffff;
+        box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 26px;
+        max-width: 450px;
+    }
+
+    .payment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .credit-card-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .input-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .input-label {
+        font-size: 10px;
+        color: #8b8e98;
+        font-weight: 600;
+    }
+
+    .input-field {
+        width: auto;
+        height: 40px;
+        padding: 0 16px;
+        border-radius: 9px;
+        outline: none;
+        background-color: #f2f2f2;
+        border: 1px solid transparent;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .input-field:focus {
+            border: 1px solid transparent;
+            box-shadow: 0px 0px 0px 2px #242424;
+            background-color: transparent;
+        }
+
+    .split-inputs {
+        display: grid;
+        grid-template-columns: 4fr 2fr;
+        gap: 15px;
+    }
+
+    .pay-button {
+        height: 55px;
+        background: linear-gradient(180deg, #363636 0%, #1b1b1b 50%, #000000 100%);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 11px;
+        border: none;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .pay-button:hover {
+            box-shadow: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px rgba(0, 0, 0, 0.23);
+        }
+
+    .separator-section {
+        width: calc(100% - 20px);
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 10px;
+        color: #8b8e98;
+        margin: 0 10px;
+    }
+
+    .separator-line {
+        height: 1px;
+        border: none;
+        background-color: #e8e8e8;
+    }
+
+    .payment-options {
+        width: calc(100% - 40px);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .paypal-button {
+        height: 55px;
+        background: #f2f2f2;
+        border-radius: 11px;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .paypal-button svg {
+            height: 18px;
+        }
+
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .success-message {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+</style>

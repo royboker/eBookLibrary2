@@ -1,0 +1,213 @@
+﻿<!--@model eBookLibrary3.Models.Book
+
+@{
+    ViewBag.Title = "Edit Book";
+}
+
+<h1>Edit Book Details</h1>
+
+<form asp-action="EditBook" method="post" class="form-horizontal">
+    @Html.HiddenFor(model => model.BookId)-->
+<!-- מזהה הספר -->
+<!--<div class="form-group">
+        <label for="BuyPrice" class="control-label">Buy Price</label>
+        @Html.TextBoxFor(model => model.BuyPrice, new { @class = "form-control", placeholder = "Enter buy price" })
+    </div>
+
+    <div class="form-group">
+        <label for="BuyPrice" class="control-label">Borrow Price</label>
+        @Html.TextBoxFor(model => model.BorrowPrice, new { @class = "form-control", placeholder = "Enter borrow price" })
+    </div>
+
+    <div class="form-group">
+        <label for="Stock" class="control-label">Stock</label>
+        @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", placeholder = "Enter stock" })
+    </div>
+
+    <div class="form-group">
+        <label for="Genre" class="control-label">Genre</label>
+        @Html.TextBoxFor(model => model.Genre, new { @class = "form-control", placeholder = "Enter genre" })
+    </div>
+
+    <div class="form-group">
+        <label for="Format" class="control-label">Format</label>
+        @Html.TextBoxFor(model => model.Format, new { @class = "form-control", placeholder = "Enter format" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="@Url.Action("ShowAdminLibrary", "Admin")" class="btn btn-secondary">Cancel</a>
+</form>-->
+
+
+<form class="form" method="post" action="@Url.Action("EditBook", "Admin")">
+    <p class="title">Edit Book Details</p>
+    <p class="message">Update the details of the book below.</p>
+
+    @Html.HiddenFor(model => model.BookId)
+
+    <label>
+        @Html.TextBoxFor(model => model.BuyPrice, new { @class = "input", placeholder = "Enter sale price" })
+        <span>Sale Price</span>
+    </label>
+
+    <label>
+        @Html.TextBoxFor(model => model.BorrowPrice, new { @class = "input", placeholder = "Enter borrow price" })
+        <span>Borrow Price</span>
+    </label>
+
+    <label>
+        @Html.TextBoxFor(model => model.Stock, new { @class = "input", placeholder = "Enter stock" })
+        <span>Stock</span>
+    </label>
+
+    <label>
+        @Html.TextBoxFor(model => model.Genre, new { @class = "input", placeholder = "Enter genre" })
+        <span>Genre</span>
+    </label>
+
+    <label>
+        @Html.TextBoxFor(model => model.Format, new { @class = "input", placeholder = "Enter format" })
+        <span>Format</span>
+    </label>
+
+    <button class="submit">Save Changes</button>
+    <a href="@Url.Action("ShowAdminLibrary", "Admin")" class="btn btn-secondary">Cancel</a>
+</form>
+
+<style>
+    /* From Uiverse.io by ammarsaa */
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+        background-color: #1a1a1a;
+        color: #fff;
+        border: 1px solid #333;
+    }
+
+    .title {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -1px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+        color: #00bfff;
+    }
+
+    .title::before {
+        width: 18px;
+        height: 18px;
+    }
+
+    .title::after {
+        width: 18px;
+        height: 18px;
+        animation: pulse 1s linear infinite;
+    }
+
+    .title::before,
+    .title::after {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        left: 0px;
+        background-color: #00bfff;
+    }
+
+    .message,
+    .signin {
+        font-size: 14.5px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .signin {
+        text-align: center;
+    }
+
+    .signin a:hover {
+        text-decoration: underline royalblue;
+    }
+
+    .signin a {
+        color: #00bfff;
+    }
+
+    .flex {
+        display: flex;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .form label {
+        position: relative;
+    }
+
+    .form label .input {
+        background-color: #333;
+        color: #fff;
+        width: 100%;
+        padding: 20px 05px 05px 10px;
+        outline: 0;
+        border: 1px solid rgba(105, 105, 105, 0.397);
+        border-radius: 10px;
+    }
+
+    .form label .input + span {
+        color: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        left: 10px;
+        top: 0px;
+        font-size: 0.9em;
+        cursor: text;
+        transition: 0.3s ease;
+    }
+
+    .form label .input:placeholder-shown + span {
+        top: 12.5px;
+        font-size: 0.9em;
+    }
+
+    .form label .input:focus + span,
+    .form label .input:valid + span {
+        color: #00bfff;
+        top: 0px;
+        font-size: 0.7em;
+        font-weight: 600;
+    }
+
+    .input {
+        font-size: medium;
+    }
+
+    .submit {
+        border: none;
+        outline: none;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 16px;
+        transform: .3s ease;
+        background-color: #00bfff;
+    }
+
+    .submit:hover {
+        background-color: #00bfff96;
+    }
+
+  
+
+        to {
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+</style>
+
