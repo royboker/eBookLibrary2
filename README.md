@@ -100,7 +100,7 @@ This project is a fully functional ASP.NET MVC-based Digital Library Web Applica
 
 ## Author
 
-Developed by \[Roy Boker], as part of a student final project to demonstrate backend engineering capabilities and software design with real-world constraints.
+Developed by \Roy Boker, as part of a student final project to demonstrate backend engineering capabilities and software design with real-world constraints.
 
 ---
 
